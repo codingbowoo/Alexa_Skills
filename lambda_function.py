@@ -160,9 +160,9 @@ ITEMS.append(Item("Missouri", "MO", "Jefferson City", "1821", "24"))
 ITEMS.append(Item("Montana", "MT", "Helena", "1889", "41"))
 ITEMS.append(Item("Nebraska", "NE", "Lincoln", "1867", "37"))
 ITEMS.append(Item("Nevada", "NV", "Carson City", "1864", "36"))
-ITEMS.append(Item("Hampshire", "NH", "Concord", "1788", "9"))
-ITEMS.append(Item("Jersey", "NJ", "Trenton", "1787", "3"))
-ITEMS.append(Item("Mexico", "NM", "Santa Fe", "1912", "47"))
+ITEMS.append(Item("New Hampshire", "NH", "Concord", "1788", "9"))
+ITEMS.append(Item("New Jersey", "NJ", "Trenton", "1787", "3"))
+ITEMS.append(Item("New Mexico", "NM", "Santa Fe", "1912", "47"))
 ITEMS.append(Item("New York", "NY", "Albany", "1788", "11"))
 ITEMS.append(Item("North Carolina", "NC", "Raleigh", "1789", "12"))
 ITEMS.append(Item("North Dakota", "ND", "Bismarck", "1889", "39"))
@@ -475,7 +475,6 @@ def get_speech_description(item):
         ' admitted to the Union in '+stateyear +'.'
         ' The capital of ' +sstate +' is '+item.capital +','
         ' and the abbreviation for ' +sstate +' is ' +sformat +'.'
-        ' '  +sstate +' has been added to your Alexa app. '
         ' Which other state or capital would you like to know about?'
     )
 
