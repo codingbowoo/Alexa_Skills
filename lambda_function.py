@@ -7,7 +7,7 @@ import random
 import boto3
 
 
-MAX_QUESTION = 1
+MAX_QUESTION = 4
 
 #This is the welcome message for when a user starts the skill without a specific intent.
 WELCOME_MESSAGE = ("<say-as interpret-as='interjection'>"
