@@ -19,7 +19,7 @@ SKILLTITLE = "States of the USA"
 
 
 #This is the message a user will hear when they start a quiz.
-START_QUIZ_MESSAGE = "OK.  I will ask you 10 questions about the United States."
+START_QUIZ_MESSAGE = "OK.  I will ask you 4 questions about the United States."
 
 #This is the message a user will hear when they try to cancel or stop the skill"
 #or when they finish a quiz.
@@ -278,25 +278,6 @@ def answer_quiz(request, intent, session):
         return ask_question(request, speech_message)
 
     speech_message += get_finalscore(QUIZSCORE, COUNTER)
-    
-    #"<audio src='https://s3.amazonaws.com/alexa-soonshin/korean_recognizer/an.mp3' />"
-    polly_client = boto3.Session(aws_access_key_id="AKIAI24DTPPUCBXO2MDQ",aws_secret_access_key="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",region_name='us-west-2').client('polly')
-    seoyeon_response = polly_client.synthesize_speech(VoiceId='Seoyeon', OutputFormat='mp3', Text ='안녕하세요 서연이 말하게하고싶습니다' )
-    #speech_message += "<audio src="+seoyeon_response+"/>"
-    #speech_message += "<audio src="+seoyeon_response['AudioStream'].read()+"/>"
-    speech_message += "<audio src='https://s3.amazonaws.com/transcribe-daniel/seoyeon.mp3' />"
-    #<audio src='https://s3.amazonaws.com/transcribe-daniel/seoyeon.mp3'/>
-    
-    #s3 = boto3.resource('s3')
-    #bucket = s3.Bucket('transcribe-daniel')
-    
-    #file = open('https://s3.amazonaws.com/transcribe-daniel/seoyeon.mp3', 'wb')
-    #file.write(response['AudioStream'].read())
-    #file.close()
-    #bucket.upload_fileobj(file, 'AKIAI24DTPPUCBXO2MDQ')
-    
-    
-    speech_message += '<phoneme alphabet="ipa" ph="jɑŋ.njʌm.t͡ʃi.kin.">양념치킨</phoneme>'
     speech_message += EXIT_SKILL_MESSAGE
     STATE = STATE_START
     COUNTER = 0
