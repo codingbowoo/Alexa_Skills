@@ -10,8 +10,7 @@ import boto3
 MAX_QUESTION = 4
 
 #This is the welcome message for when a user starts the skill without a specific intent.
-WELCOME_MESSAGE = ("<say-as interpret-as='interjection'>"
-    "Welcome to the United States Quiz Game!  You can ask me about any of the"
+WELCOME_MESSAGE = ("Welcome to the United States Quiz Game!  You can ask me about any of the"
     " fifty states and their capitals, or you can ask me to start a quiz."
     "  What would you like to do?")
 #This is the message a user will hear when they start a quiz.
@@ -45,11 +44,6 @@ STATE = STATE_START
 COUNTER = 0
 QUIZSCORE = 0
 
-
-SAYAS_INTERJECT = "<say-as interpret-as='interjection'>"
-SAYAS_SPELLOUT = "<say-as interpret-as='spell-out'>"
-SAYAS = "</say-as>"
-BREAKSTRONG = "<break strength='strong'/>"
 
  # --------------- speech cons -----------------
 
