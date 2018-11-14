@@ -4,21 +4,20 @@ from __future__ import print_function
 import math
 import string
 import random
-import boto3
 
 
-MAX_QUESTION = 4
+MAX_QUESTION = 5
 
 #This is the welcome message for when a user starts the skill without a specific intent.
 WELCOME_MESSAGE = ("Welcome to the United States Quiz Game!  You can ask me about any of the"
-    " fifty states and their capitals, or you can ask me to start a quiz."
-    "  What would you like to do?")
+                   " fifty states and their capitals, or you can ask me to start a quiz."
+                   "  What would you like to do?")
 #This is the message a user will hear when they start a quiz.
 SKILLTITLE = "States of the USA"
 
 
 #This is the message a user will hear when they start a quiz.
-START_QUIZ_MESSAGE = "OK.  I will ask you 4 questions about the United States."
+START_QUIZ_MESSAGE = "OK.  I will ask you 5 questions about the United States."
 
 #This is the message a user will hear when they try to cancel or stop the skill"
 #or when they finish a quiz.
@@ -45,16 +44,21 @@ COUNTER = 0
 QUIZSCORE = 0
 
 
+SAYAS_INTERJECT = "<say-as interpret-as='interjection'>"
+SAYAS_SPELLOUT = "<say-as interpret-as='spell-out'>"
+SAYAS = "</say-as>"
+BREAKSTRONG = "<break strength='strong'/>"
+
  # --------------- speech cons -----------------
 
  # This is a list of positive/negative speechcons that this skill will use when a user
  # gets a correct answer. For a full list of supported speechcons, go here:
  # https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/speechcon-reference
 SPEECH_CONS_CORRECT = (["Booya", "All righty", "Bam", "Bazinga", "Bingo", "Boom", "Bravo",
-                        "Cha Ching", "Cheers", "Dynomite", "Hip hip hooray", "Hurrah",
+                       "Cha Ching", "Cheers", "Dynomite", "Hip hip hooray", "Hurrah",
                         "Hurray", "Huzzah", "Oh dear.  Just kidding.  Hurray", "Kaboom",
-                        "Kaching", "Oh snap", "Phew", "Righto", "Way to go", "Well done",
-                        "Whee", "Woo hoo", "Yay", "Wowza", "Yowsa"])
+                       "Kaching", "Oh snap", "Phew", "Righto", "Way to go", "Well done",
+                       "Whee", "Woo hoo", "Yay", "Wowza", "Yowsa"])
 
 SPEECH_CONS_WRONG = (["Argh", "Aw man", "Blarg", "Blast", "Boo", "Bummer", "Darn", "D'oh",
                       "Dun dun dun", "Eek", "Honk", "Le sigh", "Mamma mia", "Oh boy",
@@ -126,6 +130,7 @@ class Item:
 
 # --------------- our list of states -----------------
 ITEMS = []
+"""
 ITEMS.append(Item("Alabama", "AL", "Montgomery", "1819", "22"))
 ITEMS.append(Item("Alaska", "AK", "Juneau", "1959", "49"))
 ITEMS.append(Item("Arizona", "AZ", "Phoenix", "1912", "48"))
@@ -154,9 +159,9 @@ ITEMS.append(Item("Missouri", "MO", "Jefferson City", "1821", "24"))
 ITEMS.append(Item("Montana", "MT", "Helena", "1889", "41"))
 ITEMS.append(Item("Nebraska", "NE", "Lincoln", "1867", "37"))
 ITEMS.append(Item("Nevada", "NV", "Carson City", "1864", "36"))
-ITEMS.append(Item("New Hampshire", "NH", "Concord", "1788", "9"))
-ITEMS.append(Item("New Jersey", "NJ", "Trenton", "1787", "3"))
-ITEMS.append(Item("New Mexico", "NM", "Santa Fe", "1912", "47"))
+ITEMS.append(Item("Hampshire", "NH", "Concord", "1788", "9"))
+ITEMS.append(Item("Jersey", "NJ", "Trenton", "1787", "3"))
+ITEMS.append(Item("Mexico", "NM", "Santa Fe", "1912", "47"))
 ITEMS.append(Item("New York", "NY", "Albany", "1788", "11"))
 ITEMS.append(Item("North Carolina", "NC", "Raleigh", "1789", "12"))
 ITEMS.append(Item("North Dakota", "ND", "Bismarck", "1889", "39"))
@@ -168,14 +173,15 @@ ITEMS.append(Item("Rhode Island", "RI", "Providence", "1790", "13"))
 ITEMS.append(Item("South Carolina", "SC", "Columbia", "1788", "8"))
 ITEMS.append(Item("South Dakota", "SD", "Pierre", "1889", "40"))
 ITEMS.append(Item("Tennessee", "TN", "Nashville", "1796", "16"))
-ITEMS.append(Item("Texas", "TX", "Austin", "1845", "28"))
-ITEMS.append(Item("Utah", "UT", "Salt Lake City", "1896", "45"))
-ITEMS.append(Item("Vermont", "VT", "Montpelier", "1791", "14"))
-ITEMS.append(Item("Virginia", "VA", "Richmond", "1788", "10"))
+"""
+#ITEMS.append(Item("Texas", "TX", "Austin", "1845", "28"))
+#ITEMS.append(Item("Utah", "UT", "Salt Lake City", "1896", "45"))
+#ITEMS.append(Item("Vermont", "VT", "Montpelier", "1791", "14"))
+#ITEMS.append(Item("Virginia", "VA", "Richmond", "1788", "10"))
 ITEMS.append(Item("Washington", "WA", "Olympia", "1889", "42"))
-ITEMS.append(Item("West Virginia", "WV", "Charleston", "1863", "35"))
-ITEMS.append(Item("Wisconsin", "WI", "Madison", "1848", "30"))
-ITEMS.append(Item("Wyoming", "WY", "Cheyenne", "1890", "44"))
+#ITEMS.append(Item("West Virginia", "WV", "Charleston", "1863", "35"))
+#ITEMS.append(Item("Wisconsin", "WI", "Madison", "1848", "30"))
+#ITEMS.append(Item("Wyoming", "WY", "Cheyenne", "1890", "44"))
 
 
 # --------------- entry point -----------------
@@ -450,6 +456,7 @@ def get_speech_description(item):
         ' admitted to the Union in '+stateyear +'.'
         ' The capital of ' +sstate +' is '+item.capital +','
         ' and the abbreviation for ' +sstate +' is ' +sformat +'.'
+        #' '  +sstate +' has been added to your Alexa app. '
         ' Which other state or capital would you like to know about?'
     )
 
@@ -476,7 +483,7 @@ def get_badanswer(outtext):
 
     if outtext == "":
         outtext = "This"
-    return ("I'm sorry. " +outtext +" is not something I know very "
+    return ("I'm sorry. " + "that" +" is not something I know very "
             "much about in this skill. " +HELP_MESSAGE)
 
 def get_smallimage(name):
