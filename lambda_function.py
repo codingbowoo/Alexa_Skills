@@ -130,7 +130,7 @@ class Item:
 
 # --------------- our list of states -----------------
 ITEMS = []
-"""
+
 ITEMS.append(Item("Alabama", "AL", "Montgomery", "1819", "22"))
 ITEMS.append(Item("Alaska", "AK", "Juneau", "1959", "49"))
 ITEMS.append(Item("Arizona", "AZ", "Phoenix", "1912", "48"))
@@ -173,15 +173,15 @@ ITEMS.append(Item("Rhode Island", "RI", "Providence", "1790", "13"))
 ITEMS.append(Item("South Carolina", "SC", "Columbia", "1788", "8"))
 ITEMS.append(Item("South Dakota", "SD", "Pierre", "1889", "40"))
 ITEMS.append(Item("Tennessee", "TN", "Nashville", "1796", "16"))
-"""
-#ITEMS.append(Item("Texas", "TX", "Austin", "1845", "28"))
-#ITEMS.append(Item("Utah", "UT", "Salt Lake City", "1896", "45"))
-#ITEMS.append(Item("Vermont", "VT", "Montpelier", "1791", "14"))
-#ITEMS.append(Item("Virginia", "VA", "Richmond", "1788", "10"))
+
+ITEMS.append(Item("Texas", "TX", "Austin", "1845", "28"))
+ITEMS.append(Item("Utah", "UT", "Salt Lake City", "1896", "45"))
+ITEMS.append(Item("Vermont", "VT", "Montpelier", "1791", "14"))
+ITEMS.append(Item("Virginia", "VA", "Richmond", "1788", "10"))
 ITEMS.append(Item("Washington", "WA", "Olympia", "1889", "42"))
-#ITEMS.append(Item("West Virginia", "WV", "Charleston", "1863", "35"))
-#ITEMS.append(Item("Wisconsin", "WI", "Madison", "1848", "30"))
-#ITEMS.append(Item("Wyoming", "WY", "Cheyenne", "1890", "44"))
+ITEMS.append(Item("West Virginia", "WV", "Charleston", "1863", "35"))
+ITEMS.append(Item("Wisconsin", "WI", "Madison", "1848", "30"))
+ITEMS.append(Item("Wyoming", "WY", "Cheyenne", "1890", "44"))
 
 
 # --------------- entry point -----------------
